@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻糬的奇怪HTML教學部落格</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { 
+            padding-top: 80px; 
+            background-color: #f0f7ff;
+            color: #333;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+        .navbar {
+            background-color: #ffffff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .navbar-brand, .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+        .tag-cloud { 
+            padding: 10px; 
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .tag { 
+            margin: 5px; 
+            background-color: #6c757d !important;
+            font-size: 0.9rem !important;
+            font-weight: normal !important;
+        }
+        .comment-section { 
+            margin-top: 20px; 
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .profile-info {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .article-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        #comments p {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .element-demo {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .avatar-svg {
+            width: 40px;
+            height: 40px;
+        }
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                display: flex;
+                flex-direction: column;
+            }
+            .profile-info {
+                order: -1;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            .navbar-nav {
+                width: 100%;
+            }
+        }
+        /* 新增的樣式 */
+        .article-content h1, .article-content h2, .article-content h3 {
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .article-number {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .navigation-buttons a {
+            display: flex;
+            align-items: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .navigation-buttons a i {
+            margin: 0 5px;
+        }
+        .error-message, .redirect-message {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .error-message h1, .redirect-message h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .error-message p, .redirect-message p {
+            font-size: 1.5rem;
+        }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-code"></i> 麻糬的奇怪HTML教學</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i> 首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-book"></i> 教學文章</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-question-circle"></i> 常見問題</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i> 聯絡我</a>
+                </li>
+            </ul>
+            <div class="profile-info d-flex align-items-center ms-lg-4 mt-2 mt-lg-0">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#808080"/>
+                    <circle cx="50" cy="40" r="20" fill="#ffffff"/>
+                    <path d="M50 65 Q50 85 30 95 A50 50 0 0070 95 Q50 85 50 65" fill="#ffffff"/>
+                </svg>
+                <div class="ms-2">
+                    <p class="mb-0 small">Mouchi</p>
+                    <small class="text-muted">麻糬科技實驗室</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div id="main-article" class="article-content">
+        <!-- 這裡會插入文章內容 -->
+    </div>
+
+    <div class="d-flex justify-content-start mt-4">
+        <div class="tag-cloud">
+            <span class="badge tag">HTML</span>
+            <span class="badge tag">網頁設計</span>
+            <span class="badge tag">程式教學</span>
+            <span class="badge tag">前端開發</span>
+            <span class="badge tag">資訊工程</span>
+            <span class="badge tag">coding</span>
+        </div>
+    </div>
+
+    <div class="comment-section">
+        <h3><i class="fas fa-comments"></i> 留言區</h3>
+        <div id="comments"></div>
+        <div class="input-group mt-3">
+            <input type="text" id="comment-input" class="form-control" placeholder="請分享您的想法...">
+            <button onclick="postComment()" class="btn btn-primary"><i class="fas fa-paper-plane"></i> 送出</button>
+        </div>
+    </div>
+</div>
+
+<!-- 文章模板 -->
+<template id="article-1">
+    <h1 class="mb-4">HTML基礎教學：認識網頁的架構</h1>
+    <p class="lead">現在要來帶大家認識HTML的基本結構，以及行內元素和區塊元素的概念。HTML是網頁的基礎，就像是蓋房子的鷹架，支撐著整個頁面的內容喔！</p>
+    
+    <h2 class="mt-4">HTML文件的基本結構</h2>
+    <p>一個最基本的HTML文件包含以下幾個部分：</p>
+    <div class="code-block">
+        <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;網頁標題&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;這是一級標題&lt;/h1&gt;
+    &lt;p&gt;這是一個段落。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>
+    </div>
+    
+    <h3>解說：</h3>
+    <ul>
+        <li><strong>&lt;!DOCTYPE html&gt;</strong>：這個宣告，告訴瀏覽器這是一個HTML5文件。</li>
+        <li><strong>&lt;html&gt;</strong>：這是HTML文件的根元素。</li>
+        <li><strong>&lt;head&gt;</strong>：包含了文件的元資訊，例如編碼方式和標題。</li>
+        <li><strong>&lt;body&gt;</strong>：這裡放置網頁的主要內容。</li>
+    </ul>
+
+    <h2 class="mt-4">區塊元素 vs 行內元素</h2>
+    <p>在HTML中，元素大致可以分為兩類：區塊元素（Block-level elements）和行內元素（Inline elements）。讓我們來看看它們的區別：</p>
+
+    <h3>區塊元素（Block-level elements）</h3>
+    <p>區塊元素會獨占一行，並且會自動填滿父元素的寬度。常見的區塊元素包括：</p>
+    <ul>
+        <li>&lt;div&gt;</li>
+        <li>&lt;p&gt;</li>
+        <li>&lt;h1&gt; 到 &lt;h6&gt;</li>
+        <li>&lt;ul&gt; 和 &lt;ol&gt;</li>
+    </ul>
+    <p>來看個例子：</p>
+    <div class="element-demo">
+        <div style="border: 1px solid red; margin-bottom: 10px;">這是一個 div 元素</div>
+        <p style="border: 1px solid blue;">這是一個段落元素</p>
+    </div>
+
+    <h3>行內元素（Inline elements）</h3>
+    <p>行內元素不會獨占一行，它們會在同一行內排列。常見的行內元素包括：</p>
+    <ul>
+        <li>&lt;span&gt;</li>
+        <li>&lt;a&gt;</li>
+        <li>&lt;strong&gt;</li>
+        <li>&lt;em&gt;</li>
+    </ul>
+    <p>來看個例子：</p>
+    <div class="element-demo">
+        這是一段文字，包含<span style="border: 1px solid green;">一個 span 元素</span>和<a href="#" style="border: 1px solid purple;">一個連結</a>。
+    </div>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>好啦，現在輪到你們動手做做看囉！試著用以上學到的標籤和概念，製作一個簡單的個人介紹頁面。可以包含你的姓名、興趣、專長等等。記得運用區塊元素和行內元素喔！做好的同學可以在下方留言區分享你的心得喔！</p>
+
+    <p>記住，練習才能精進功夫。就像是寫程式一樣，多練習才能熟能生巧。加油！讓我們一起朝著全端工程師的目標邁進吧！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=2"><i class="fas fa-arrow-left"></i> 上一篇：HTML標籤介紹</a>
+        <a href="?id=2">下一篇：HTML標籤介紹 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-2">
+    <h1 class="mb-4">HTML標籤介紹</h1>
+    <p class="lead">現在要來介紹一些常見的HTML標籤。這些標籤是我們在寫網頁時最常使用的，它們各自有不同的功能和用途。</p>
+    
+    <h2 class="mt-4">標題標籤（Heading Tags）</h2>
+    <p>標題標籤用來定義標題，有六種不同的層級，從&lt;h1&gt;到&lt;h6&gt;，其中&lt;h1&gt;是最重要的標題，&lt;h6&gt;是最次要的標題。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;h1&gt;這是一級標題&lt;/h1&gt;
+&lt;h2&gt;這是二級標題&lt;/h2&gt;
+&lt;h3&gt;這是三級標題&lt;/h3&gt;
+&lt;h4&gt;這是四級標題&lt;/h4&gt;
+&lt;h5&gt;這是五級標題&lt;/h5&gt;
+&lt;h6&gt;這是六級標題&lt;/h6&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">段落標籤（Paragraph Tag）</h2>
+    <p>段落標籤&lt;p&gt;用來定義一個段落。瀏覽器會自動在段落前後添加一些空白，方便閱讀。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;p&gt;這是一個段落。&lt;/p&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">連結標籤（Anchor Tag）</h2>
+    <p>連結標籤&lt;a&gt;用來建立一個超連結，可以連接到其他網頁或同一網頁的不同部分。使用href屬性來指定連結的目標URL。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;a href="https://example.com"&gt;這是一個超連結&lt;/a&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">圖像標籤（Image Tag）</h2>
+    <p>圖像標籤&lt;img&gt;用來在網頁中嵌入圖像。使用src屬性來指定圖像的路徑，使用alt屬性來提供圖像的替代文字。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;img src="path/to/image.jpg" alt="描述圖像的替代文字"&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著使用這些標籤建立一個簡單的網頁。可以包含標題、段落、連結和圖像。完成後，可以在留言區分享你的心得和問題。</p>
+
+    <p>加油！透過不斷的練習，你們一定會成為HTML的高手的！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=1"><i class="fas fa-arrow-left"></i> 上一篇：HTML基礎教學</a>
+        <a href="?id=3">下一篇：HTML表單元素介紹 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-3">
+    <h1 class="mb-4">HTML表單元素介紹</h1>
+    <p class="lead">我們來介紹一些HTML中常用的表單元素。表單是用來收集使用者輸入的數據，例如登錄訊息、搜索查詢等。</p>
+    
+    <h2 class="mt-4">表單標籤（Form Tag）</h2>
+    <p>表單標籤&lt;form&gt;是所有表單元素的容器。使用action屬性來指定表單提交的目標URL，使用method屬性來指定表單提交的方法（GET或POST）。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;form action="/submit" method="post"&gt;
+    <!-- 表單元素放在這裡 -->
+&lt;/form&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">輸入標籤（Input Tag）</h2>
+    <p>輸入標籤&lt;input&gt;用來建立不同類型的輸入欄位。常見的類型有text、password、email、submit等。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;label for="username"&gt;帳戶名：&lt;/label&gt;
+&lt;input type="text" id="username" name="username"&gt;
+&lt;br&gt;
+&lt;label for="password"&gt;密碼：&lt;/label&gt;
+&lt;input type="password" id="password" name="password"&gt;
+&lt;br&gt;
+&lt;input type="submit" value="提交"&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">選擇標籤（Select Tag）</h2>
+    <p>選擇標籤&lt;select&gt;用來建立下拉列表。使用&lt;option&gt;標籤來定義下拉列表中的選項。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;label for="fruit"&gt;選擇你喜歡的水果：&lt;/label&gt;
+&lt;select id="fruit" name="fruit"&gt;
+    &lt;option value="apple"&gt;蘋果&lt;/option&gt;
+    &lt;option value="banana"&gt;香蕉&lt;/option&gt;
+    &lt;option value="cherry"&gt;櫻桃&lt;/option&gt;
+&lt;/select&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">文字區域標籤（Textarea Tag）</h2>
+    <p>文字區域標籤&lt;textarea&gt;用來建立多行的文字輸入區域。</p>
+    <div class="code-block">
+        <pre><code>
+&lt;label for="comments"&gt;留言：&lt;/label&gt;
+&lt;textarea id="comments" name="comments" rows="4" cols="50"&gt;&lt;/textarea&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著建立一個包含各種表單元素的表單。可以包含使用者名稱、密碼、喜好選項等。完成後，分享你的表單設計和心得。</p>
+
+    <p>透過不斷的實作，你會越來越熟悉表單元素的使用方式，並能靈活應用在實際的網頁開發中！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=2"><i class="fas fa-arrow-left"></i> 上一篇：HTML標籤介紹</a>
+        <a href="?id=4">下一篇：CSS基礎教學 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-4">
+    <h1 class="mb-4">CSS基礎教學</h1>
+    <p class="lead">我們來介紹CSS，它是用來控制網頁外觀的語言。CSS讓我們可以設定文字顏色、背景顏色、邊框等樣式。</p>
+    
+    <h2 class="mt-4">CSS語法</h2>
+    <p>CSS由選擇器和宣告塊組成。選擇器用來選擇要應用樣式的HTML元素，宣告塊包含了要應用的樣式。</p>
+    <div class="code-block">
+        <pre><code>
+/* 這是CSS語法範例 */
+p {
+    color: red; /* 設定文字顏色為紅色 */
+    font-size: 16px; /* 設定文字大小為16像素 */
+}
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">選擇器</h2>
+    <p>常見的CSS選擇器包括類選擇器、ID選擇器和元素選擇器。</p>
+    <ul>
+        <li>元素選擇器：選擇所有指定的HTML元素。例如，<code>p</code> 選擇所有段落元素。</li>
+        <li>類選擇器：選擇所有擁有指定類的元素。例如，<code>.className</code> 選擇所有類名為className的元素。</li>
+        <li>ID選擇器：選擇擁有指定ID的元素。例如，<code>#idName</code> 選擇ID為idName的元素。</li>
+    </ul>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著使用CSS選擇器和樣式，設計一個簡單的個人介紹頁面。可以包含文字顏色、背景顏色和邊框樣式。完成後，可以在留言區分享你的設計和心得。</p>
+
+    <p>加油！透過不斷的練習，你們一定會成為CSS的高手的！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=3"><i class="fas fa-arrow-left"></i> 上一篇：HTML表單元素介紹</a>
+        <a href="?id=5">下一篇：JavaScript基礎教學 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-5">
+    <h1 class="mb-4">JavaScript基礎教學</h1>
+    <p class="lead">我們來介紹JavaScript，它是用來控制網頁行為的語言。JavaScript讓我們可以讓網頁具有互動性。</p>
+    
+    <h2 class="mt-4">JavaScript語法</h2>
+    <p>JavaScript是一種動態語言，可以在網頁中插入腳本來控制頁面行為。以下是一個基本的JavaScript範例：</p>
+    <div class="code-block">
+        <pre><code>
+// 這是一個JavaScript語法範例
+document.addEventListener('DOMContentLoaded', function() {
+    alert('網頁已經載入完成');
+});
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">變數和資料型態</h2>
+    <p>JavaScript有多種資料型態，包括數字、字串、布林值等。我們可以使用<code>var</code>、<code>let</code>或<code>const</code>來宣告變數。</p>
+    <div class="code-block">
+        <pre><code>
+let name = '阿明教授'; // 字串
+let age = 30; // 數字
+let isTeacher = true; // 布林值
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著使用JavaScript，製作一個簡單的互動網頁。例如，可以設計一個按鈕，點擊後會顯示一段文字。完成後，可以在留言區分享你的設計和心得。</p>
+
+    <p>透過不斷的練習，你會越來越熟悉JavaScript的使用方式，並能靈活應用在實際的網頁開發中！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=4"><i class="fas fa-arrow-left"></i> 上一篇：CSS基礎教學</a>
+        <a href="?id=6">下一篇：XSS攻擊與防禦 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-6">
+    <h1 class="mb-4">XSS攻擊與防禦</h1>
+    <p class="lead">現在，有個很重要的重點，我們來介紹XSS攻擊，它是一種常見的網頁攻擊技術。我們還會學習如何防禦這種攻擊。</p>
+    
+    <h2 class="mt-4">什麼是XSS攻擊</h2>
+    <p>XSS（跨站腳本攻擊）是一種注入惡意腳本到網站的攻擊技術，攻擊者可以通過這種方式竊取帳戶訊息或篡改網頁內容。</p>
+    
+    <h2 class="mt-4">XSS攻擊範例</h2>
+    <p>以下是一個簡單的XSS攻擊範例：</p>
+    <div class="code-block">
+        <pre><code>
+&lt;script&gt;
+alert('這是一個XSS攻擊');
+&lt;/script&gt;
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">防禦XSS攻擊</h2>
+    <p>我們可以通過多種方法來防禦XSS攻擊，例如：</p>
+    <ul>
+        <li>對用戶輸入進行過濾和轉義</li>
+        <li>使用HTTP Only和Secure屬性保護Cookie</li>
+        <li>使用內容安全策略（CSP）來限制可以執行的腳本</li>
+    </ul>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著設計一個安全的表單，確保用戶輸入的內容不會導致XSS攻擊。完成後，可以在留言區分享你的設計和心得。</p>
+
+    <p>透過不斷的學習和實作，你會越來越熟悉防禦XSS攻擊的方法，並能更好地保護你的網站安全！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=5"><i class="fas fa-arrow-left"></i> 上一篇：JavaScript基礎教學</a>
+        <a href="?id=7">下一篇：SQL注入攻擊與防禦 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<template id="article-7">
+    <h1 class="mb-4">SQL注入攻擊與防禦</h1>
+    <p class="lead">我們來介紹SQL注入攻擊，它是一種常見的資料庫攻擊技術。我們還會學習如何防禦這種攻擊。</p>
+    
+    <h2 class="mt-4">什麼是SQL注入攻擊</h2>
+    <p>SQL注入攻擊是通過在SQL查詢中插入惡意程式，從而控制資料庫的攻擊技術。攻擊者可以通過這種方式竊取或篡改資料庫中的資料。</p>
+    
+    <h2 class="mt-4">SQL注入攻擊範例</h2>
+    <p>以下是一個簡單的SQL注入攻擊範例：</p>
+    <div class="code-block">
+        <pre><code>
+username = "' OR '1'='1";
+query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
+        </code></pre>
+    </div>
+
+    <h2 class="mt-4">防禦SQL注入攻擊</h2>
+    <p>我們可以通過多種方法來防禦SQL注入攻擊，例如：</p>
+    <ul>
+        <li>使用預處理語句和參數化查詢</li>
+        <li>對帳號輸入進行過濾和驗證</li>
+        <li>限制資料庫帳號權限</li>
+    </ul>
+
+    <h2 class="mt-4">實作練習</h2>
+    <p>現在，試著設計一個安全的登錄表單，確保使用者輸入的內容不會導致SQL注入攻擊。完成後，可以在留言區分享你的設計和心得。</p>
+
+    <p>透過不斷的學習和實作，你會越來越熟悉防禦SQL注入攻擊的方法，並能更好地保護你的資料庫安全！</p>
+
+    <div class="navigation-buttons">
+        <a href="?id=6"><i class="fas fa-arrow-left"></i> 上一篇：XSS攻擊與防禦</a>
+        <a href="?id=1">下一篇：HTML基礎教學 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 獲取URL中的參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+
+        if (articleId) {
+            // 根據ID獲取對應的文章模板
+            const articleTemplate = document.getElementById('article-' + articleId);
+
+            if (articleTemplate) {
+                // 複製模板內容到主區段中
+                const mainArticle = document.getElementById('main-article');
+                mainArticle.innerHTML = articleTemplate.innerHTML;
+
+                // 在文章開頭添加編號
+                const articleNumber = document.createElement('span');
+                articleNumber.className = 'article-number';
+                articleNumber.textContent = '#' + articleId;
+
+                const title = mainArticle.querySelector('h1');
+                title.insertBefore(articleNumber, title.firstChild);
+            } else {
+                displayErrorMessage(articleId);
+            }
+        } else {
+            showRedirectMessage();
+        }
+    });
+
+    function showRedirectMessage() {
+        const mainArticle = document.getElementById('main-article');
+        mainArticle.innerHTML = `
+            <div class="redirect-message">
+                <h1>準備重新導向</h1>
+                <p>即將重新導向至首頁...</p>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        `;
+        setTimeout(function() {
+            window.location.href = "?id=1";
+        }, 3000);
+    }
+
+    function displayErrorMessage(articleId) {
+        const mainArticle = document.getElementById('main-article');
+        mainArticle.innerHTML = `
+            <div class="error-message">
+                <h1>未找到網頁</h1>
+                <p>您輸入的ID <strong>${articleId}</strong> 未找到對應的文章。</p>
+            </div>
+        `;
+    }
+
+    function postComment() {
+        var input = document.getElementById('comment-input');
+        var comments = document.getElementById('comments');
+        if (input.value.trim() !== '') {
+            var newComment = document.createElement('p');
+            newComment.innerHTML = '<i class="fas fa-user-circle"></i> <strong>同學</strong>: ' + input.value;
+            comments.appendChild(newComment);
+            input.value = ''; // 發送後清空輸入框
+        } else {
+            alert('欸欸，記得打字喔！');
+        }
+    }
+</script>
+</body>
+</html>
