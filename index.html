@@ -93,7 +93,7 @@
                 width: 100%;
             }
         }
-        /* 新增的樣式 */
+        /* 主區塊樣式 */
         .article-content h1, .article-content h2, .article-content h3 {
             border-bottom: 1px solid #dee2e6;
             padding-bottom: 10px;
@@ -177,7 +177,7 @@
 
 <div class="container mt-4">
     <div id="main-article" class="article-content">
-        <!-- 這裡會插入文章內容 -->
+        <!-- 自動插入文章內容 -->
     </div>
 
     <div class="d-flex justify-content-start mt-4">
@@ -531,12 +531,12 @@ query = "SELECT * FROM users WHERE username = '" + username + "' AND password = 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // 獲取URL中的參數
+        // 取得URL中的參數
         const urlParams = new URLSearchParams(window.location.search);
         const articleId = urlParams.get('id');
 
         if (articleId) {
-            // 根據ID獲取對應的文章模板
+            // 根據ID找到對應的文章模板
             const articleTemplate = document.getElementById('article-' + articleId);
 
             if (articleTemplate) {
